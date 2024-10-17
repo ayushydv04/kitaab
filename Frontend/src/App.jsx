@@ -9,8 +9,30 @@ import Cart from './pages/Cart'
 import Login from './pages/Login'
 import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
+import { getPost } from './api/PostApi'
+// import { useEffect } from 'react'
+// import { useState } from'react'
 
 const App = () => {
+
+  // const [data, setData] = useState([])
+
+
+  // const getPostData = async () => {
+  //   const res = await getPost()
+  //   setData(res.data);
+  // }
+
+  // useEffect(() => {
+  //   getPostData();
+  
+  // }, [])
+
+  // console.log(data);
+  
+  
+   
+
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
 
