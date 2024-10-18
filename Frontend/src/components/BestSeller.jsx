@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import {ShopContext} from '../context/ShopContext'
 import Title from './Title';
 import { useState, useEffect } from 'react';
+import ProductItem from './ProductItem';
 
 const BestSeller = () => {
 
@@ -10,9 +11,9 @@ const BestSeller = () => {
     const [bestSeller, setBestSeller] = useState([])
 
     useEffect(() => {
-        const bestProduct = products.filter((item) => (bestseller))
+        const bestProduct = products.filter((item) => (item.bestseller))
         setBestSeller(bestProduct.slice(0, 5))
-    }, [])
+    }, [products])
 
     console.log(bestSeller);
     // error hai
