@@ -5,16 +5,25 @@ import { IoIosArrowForward } from "react-icons/io";
 import Title from "../components/Title"
 import ProductItem from '../components/ProductItem';
 import AllProductsShow from '../components/AllProductsShow';
+import { useParams } from 'react-router-dom';
 
 
 const Collection = () => {
 
-  const { products } = useContext(ShopContext);
+  const {productId} = useParams();
+  
+  
+
+  const { products, search, showSearch, addToCart } = useContext(ShopContext);
   
 
   const [showFilter, setShowFilter] = useState(true)
 
   const [allProducts, setAllProducts] = useState([])
+
+  useEffect(() => {
+    setAllProducts(products)
+  }, [products])
 
   // Logic for category section is starts here
 // Two array state for category
@@ -24,6 +33,9 @@ const Collection = () => {
 
   // useState for sort using high low etc
   const [sortType, setSortType] = useState('none')
+
+  // For noproducts found
+  const [noProductsFound, setNoProductsFound] = useState(false)
 
 // Function for category section toggle selecting and putting it in array and removing on again clicking
 
@@ -53,6 +65,12 @@ const Collection = () => {
 
   const applyFilter = () => {
     let productsCopy = products.slice();
+    
+    // For searching for products
+    // To filter products based on search querry
+    if(showSearch && search){
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
 
     if(category.length > 0){
       productsCopy = productsCopy.filter(item => category.includes(item.category))
@@ -63,8 +81,26 @@ const Collection = () => {
     }
       
 
-    setAllProducts(productsCopy)
+    // Check if no products are found
+  if (productsCopy.length === 0) {
+    setNoProductsFound(true);  // Set this to true if no products are found
+  } else {
+    setNoProductsFound(false); // Set this to false if products are found
   }
+
+
+    setAllProducts(productsCopy);  // Update the product list
+    
+  }
+
+
+
+
+
+  // this useEffect is for changing the values in array and on the basis of that fetching products again and again
+  useEffect(() => {
+    applyFilter()
+  }, [products, category, subCategory, search, showSearch])
 
 
   // Category logic ends here
@@ -95,22 +131,22 @@ const Collection = () => {
 
   }
 
-
-  useEffect(() => {
-    setAllProducts(products)
-  }, [products])
-
-
-  // this useEffect is for changing the values in array and on the basis of that fetching products again and again
-  useEffect(() => {
-    applyFilter()
-  }, [category, subCategory])
-
   useEffect(()=>{
     sortProducts()
   }, [sortType])
 
+
+  
+
+
+  
+
+  
+
  
+
+  
+
 
 
   return (
@@ -184,12 +220,15 @@ const Collection = () => {
         {/* flex gap-x-5 gap-y-10 justify-center flex-wrap mt-24  */}
         {/* grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 */}
         <div className="flex gap-x-4 gap-y-10 justify-center flex-wrap mt-24">
-        {
-            allProducts.map((item, index) => (
-                <AllProductsShow key={index} item={item} />
-            ))
-        }
-    </div>
+  {
+    noProductsFound 
+      ? <p>No product found</p> 
+      : allProducts.map((item, index) => (
+          <AllProductsShow  key={index} item={item} />
+        ))
+  }
+</div>
+
 
       </div>
 

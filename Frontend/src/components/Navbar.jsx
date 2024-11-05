@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -8,9 +8,12 @@ import { CgProfile } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
 import { CiMenuFries } from "react-icons/ci";
 import { MdClose } from "react-icons/md";
+import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+
+  const { showSearch, setShowSearch, getCartCount } = useContext(ShopContext)
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
@@ -40,7 +43,7 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center gap-6">
-        <FiSearch className="w-5 h-5 cursor-pointer" />
+        <FiSearch onClick={()=>setShowSearch(true)} className="w-5 h-5 cursor-pointer" />
 
         <div className="group relative">
           <CgProfile className="w-5 h-5 cursor-pointer" />
@@ -56,7 +59,7 @@ const Navbar = () => {
         <Link to="/cart" className="relative">
           <IoCartOutline className="w-6 min-w-6 h-6 cursor-pointer" />
           <p className="absolute right-[-5px] bottom-[-2px] w-4 h-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            10
+            {getCartCount()}
           </p>
         </Link>
 

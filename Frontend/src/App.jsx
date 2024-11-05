@@ -11,6 +11,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import { getPost } from './api/PostApi'
 import Footer from './components/Footer'
+import SearchBar from './components/SearchBar'
 // import { useEffect } from 'react'
 // import { useState } from'react'
 
@@ -38,6 +39,8 @@ const App = () => {
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
 
       <Navbar/>
+      
+      <SearchBar />
 
       <Routes>
         <Route path='/' element={<Home/>} />

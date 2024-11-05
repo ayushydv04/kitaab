@@ -1,14 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CiCirclePlus } from "react-icons/ci";
 
 
 const AllProductsShow = ({item}) => {
 
-    const {imageUrl, name, description, price} = item;
+  const { pId, imageUrl, name, description, price } = item;
 
-    const {currency} = useContext(ShopContext);
+  const { products, addToCart } = useContext(ShopContext);
+
+  const [productData, setProductData] = useState(null);
+
+  // Function to fetch product data based on id
+  const fetchProductData = async (id) => {
+    const foundProduct = products.find((product) => product.pId === id);
+
+    if (foundProduct) {
+      setProductData(foundProduct);
+      console.log("Product Details:", foundProduct); // Log the found product data
+    } else {
+      console.log("Product not found");
+    }
+  };
+
+  // Handle the plus icon click
+  // Handle the plus icon click
+  
+    
 
   return (
     <div className='w-44 bg-gray-100 rounded-lg  gap-5 overflow-hidden'>
@@ -21,7 +40,7 @@ const AllProductsShow = ({item}) => {
         <p className='overflow-hidden line-clamp-2 min-h-6 text-xs'>{description}</p>
         <div className="flex justify-between pr-1 mt-3 ">
             <p className='hover:scale-110 transition ease-in-out text-sm font-medium'>{price}</p>
-            <CiCirclePlus className='hover:scale-110 transition ease-in-out' size={"1.5em"} color='#4aab47' />
+            <CiCirclePlus onClick={() => addToCart(pId)} className='hover:scale-110 transition ease-in-out' size={"1.5em"} color='#4aab47' />
         </div>
         </div>
     </div>
