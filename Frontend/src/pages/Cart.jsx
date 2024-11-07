@@ -6,7 +6,7 @@ import CartTotal from '../components/CartTotal';
 
 const Cart = () => {
 
-  const { products, currency, cartItems, updateQuantity } = useContext(ShopContext)
+  const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext)
 
   const [cartData, setCartData] = useState([])
 
@@ -65,7 +65,7 @@ const Cart = () => {
               >
                 <div className="flex items-start gap-6">
 
-                  <div className='bg-green-400 w-20 h-20 ml-10 sm:w-20 rounded-sm overflow-hidden'>
+                  <div className=' w-20 h-20 ml-10 sm:w-20 rounded-sm overflow-hidden'>
                     <img className="object-cover w-full h-full" src={productData.imageUrl} alt="" />
                   </div>
 
@@ -87,6 +87,12 @@ const Cart = () => {
         <div className='flex justify-end my-20'>
           <div className='w-full sm:w-[450px]'> 
             <CartTotal/>
+            <div className='w-full text-end'>
+              <button onClick={()=>navigate("/place-order")} className='bg-black text-white text-sm my-8  px-7 py-2'>
+                PROCEED TO CHECKOUT
+                {/* <span className='ml-2 font-bold'>${cartData.reduce((acc, curr) => acc + curr.quantity * productData.price, 0)}</span> */}
+              </button>
+            </div>
           </div>
         </div>
 

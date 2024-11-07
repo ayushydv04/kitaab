@@ -2,6 +2,7 @@ import { createContext } from "react";
 import { getPost } from "../api/PostApi";
 import { useEffect } from "react";
 import { useState } from'react'
+import {useNavigate } from 'react-router-dom'
 
 
 export const ShopContext = createContext();
@@ -77,29 +78,27 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
   };
 
-
+  
   const getCartAmount = () => {
     let totalAmount = 0;
   
     for (const itemId in cartItems) {
-      const itemInfo = products.find((product) => product.pId === itemId);
-      
+      // Ensure itemId is converted to the same type as pId, assuming pId is a number
+      const itemInfo = products.find((product) => product.pId === Number(itemId));
+  
       if (itemInfo) {
-        totalAmount += itemInfo.price * cartItems[itemId]; // Multiply price by quantity in cartItems
+        totalAmount += itemInfo.price * cartItems[itemId];
       }
     }
   
     return totalAmount;
   };
-  
-
  
   
 
-
-
   const currency = "₹";
   const delivery_fee = 10;
+  const navigate = useNavigate()
 
   const value = {
     products,
@@ -107,7 +106,7 @@ const ShopContextProvider = (props) => {
     delivery_fee,
     search, setSearch, showSearch, setShowSearch, 
     cartItems, addToCart, getCartCount,
-    updateQuantity, getCartAmount
+    updateQuantity, getCartAmount, navigate
   };
 
   return (

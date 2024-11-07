@@ -1,0 +1,8 @@
+place order page 
+
+
+Will add Show QR code and make a payment by scanning and will also add make a payment with upi id 
+
+
+
+DT20246269891
