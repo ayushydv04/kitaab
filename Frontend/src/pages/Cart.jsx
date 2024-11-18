@@ -66,7 +66,7 @@ const Cart = () => {
                 <div className="flex items-start gap-6">
 
                   <div className=' w-20 h-20 ml-10 sm:w-20 rounded-sm overflow-hidden'>
-                    <img className="object-cover w-full h-full" src={productData.imageUrl} alt="" />
+                    <img className="object-cover w-full h-full" src={productData.image} alt="" />
                   </div>
 
                   <div>

@@ -6,7 +6,7 @@ import { CiCirclePlus } from "react-icons/ci";
 
 const AllProductsShow = ({item}) => {
 
-  const { pId, imageUrl, name, description, price } = item;
+  const { pId, image, name, description, price } = item;
 
   const { products, addToCart } = useContext(ShopContext);
 
@@ -32,7 +32,7 @@ const AllProductsShow = ({item}) => {
   return (
     <div className='w-44 bg-gray-100 rounded-lg  gap-5 overflow-hidden'>
         <div className='w-44 h-40 overflow-hidden '>
-          <img className='rounded-lg hover:scale-110 transition ease-in-out object-cover w-full h-full' src={imageUrl} alt="" />
+          <img className='rounded-lg hover:scale-110 transition ease-in-out object-cover w-full h-full' src={image} alt="" />
         </div>
         <div className='p-2'>
 

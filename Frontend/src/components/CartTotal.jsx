@@ -7,7 +7,7 @@ const CartTotal = () => {
     const cartAmount = getCartAmount();
     
     // State for discounts
-    const [mrpDiscount, setMrpDiscount] = useState(10); // 10% off as an example
+    const [mrpDiscount, setMrpDiscount] = useState(100); // 10% off as an example
     const [couponCode, setCouponCode] = useState('');
     const [couponDiscount, setCouponDiscount] = useState(0);
     const [showCouponField, setShowCouponField] = useState(false);
@@ -17,8 +17,8 @@ const CartTotal = () => {
 
     // Apply coupon discount if the code matches
     const applyCoupon = () => {
-        if (couponCode === 'SAVE20') { // Example coupon code
-            setCouponDiscount(20); // e.g., 20 currency units off
+        if (couponCode === 'SAVE10') { // Example coupon code
+            setCouponDiscount(10); // e.g., 20 currency units off
         } else {
             setCouponDiscount(0); // Reset if invalid
         }
