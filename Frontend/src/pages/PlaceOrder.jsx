@@ -32,6 +32,7 @@ const PlaceOrder = () => {
     country: '',
     phone: '',
   });
+ 
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -88,7 +89,10 @@ const PlaceOrder = () => {
           else{
             toast.error(responseStripe.data.message)
           }
-        break;
+          break;
+
+         
+          
 
         default:
           break;
